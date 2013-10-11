@@ -1,5 +1,5 @@
 ---
-es-ES:
+es:
     spree:
       activerecord:
         attributes:
@@ -21,7 +21,7 @@ es-ES:
           page:
             one: Página
             many: Páginas
-            
+
       pages: Páginas
       static_content:
         static_pages: Páginas estáticas

@@ -1,6 +1,6 @@
 module StaticPage
   def self.remove_spree_mount_point(path)
-    regex = Regexp.new Rails.application.routes.url_helpers.spree_path
+    regex = Regexp.new '\A' + Rails.application.routes.url_helpers.spree_path
     path.sub( regex, '').split('?')[0]
   end
 end
@@ -20,17 +20,17 @@ class Spree::StaticRoot
   end
 end
 
-Spree::Core::Engine.routes.prepend do
+Spree::Core::Engine.add_routes do
 
   namespace :admin do
     resources :pages
   end
 
   constraints(Spree::StaticRoot) do
-    match '/', :to => 'static_content#show', :via => :get, :as => 'static'
+    get '/', :to => 'static_content#show'
   end
 
   constraints(Spree::StaticPage) do
-    match '/*path', :to => 'static_content#show', :via => :get, :as => 'static'
+    get '/*path', :to => 'static_content#show'
   end
 end
